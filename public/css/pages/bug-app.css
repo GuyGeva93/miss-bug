@@ -4,7 +4,6 @@
   align-items: center;
   gap: 30px;
   margin-top: 30px;
-  ;
 }
 
 .bug-app-container {
@@ -25,4 +24,12 @@
 
 .bug-app-severity {
   text-align: center;
+}
+
+.bug-app-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
 }

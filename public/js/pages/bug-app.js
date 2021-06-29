@@ -36,6 +36,20 @@ export default {
       </tbody>
     </table>
     </section>
+    <section class="bug-app-add">
+      <button v-if="!showForm" @click="showAddBugForm">Add new bug</button>
+      <form v-else @submit.prevent="addBug" class="bug-app-form">
+        <label for="title">Title:</label>
+        <input id="title" type="text" v-model="newBug.title">
+        <label for="description">Description:</label>
+        <textarea id="description" cols="30" rows="10" v-model="newBug.description"></textarea>
+        <label for="severity">Severity:</label>
+        <input type="number" id="severity" min="1" max="5" v-model="newBug.severity">
+        <label for="creator">Creator:</label>
+        <input id="creator" type="text" v-model="newBug.creator.nickname">
+      <button>Send</button>
+      </form>
+    </section>
   </section>
   `,
 
@@ -43,7 +57,14 @@ export default {
     return {
       bugs: [],
       nickname: 'Guy',
-      loggedInUser: userService.getLoggedInUser()
+      loggedInUser: userService.getLoggedInUser(),
+      newBug: {
+        title: '',
+        description: '',
+        severity: null,
+        creator: { "nickname": '' }
+      },
+      showForm: false
     }
   },
 
@@ -66,6 +87,20 @@ export default {
     login() {
       userService.login(this.nickname)
         .then(user => this.loggedInUser = user)
+    },
+    showAddBugForm() {
+      this.showForm = !this.showForm
+    },
+    addBug() {
+      console.log('newBug', this.newBug)
+      // bugService.save(this.newBug)
+      // this.clearForm()
+    },
+    clearForm() {
+      this.newBug.title = ''
+      this.newBug.description = ''
+      this.newBug.severity = null
+      this.newBug.creator.nickname = ''
     }
   },
 
@@ -73,13 +108,8 @@ export default {
     this.loadBugs()
   },
 
-  destroyed() {
-    ;
-  },
-
   components: {
     bugService,
     userService
   },
-
 }

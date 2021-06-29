@@ -11,3 +11,8 @@ body {
 button {
   cursor: pointer;
 }
+
+h2 {
+  margin: 0;
+  padding: 0
+}
