@@ -67,10 +67,9 @@ app.delete('/api/bug:bugId', (res, req) => {
     .then(() => {
       res.send('Deleted!')
     })
+})
 
-
-  app.listen(port, () => {
-    console.log(`My app listening at http://localhost:${port}`)
-  })
+app.listen(port, () => {
+  console.log(`My app listening at http://localhost:${port}`)
 })
 
