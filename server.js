@@ -7,7 +7,7 @@ const port = 3000
 
 // Express App Configuration
 // Ask Express.js to serve static files from the 'public' folder
-// app.use(express.static('public'))
+app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
 
