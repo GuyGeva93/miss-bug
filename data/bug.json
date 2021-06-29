@@ -10,23 +10,13 @@
     }
   },
   {
-    "_id": "abc123",
-    "title": "Cannot save a Car",
-    "description": "problem when clicking Save",
+    "_id": "abc102",
+    "title": "Cannot delete a Car",
+    "description": "problem on delete",
     "severity": 3,
     "createdAt": 1542107359454,
     "creator": {
-      "nickname": "Dror"
-    }
-  },
-  {
-    "_id": "abc12345",
-    "title": "Cannot save a Car",
-    "description": "problem when clicking Save",
-    "severity": 3,
-    "createdAt": 1542107359454,
-    "creator": {
-      "nickname": "Dror"
+      "nickname": "Itay"
     }
   }
 ]

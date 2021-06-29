@@ -21,6 +21,7 @@ function getById(bugId) {
 
 function remove(bugId) {
   const idx = gBugs.findIndex(bug => bug._id === bugId)
+  if (idx < 0) return Promise.reject(`Didn't find index`)
   gBugs.splice(idx, 1)
   return _saveToFile()
 }
@@ -37,7 +38,8 @@ function save(bugToSave) {
   }
   if (bugToSave._id) {
     const idx = gBugs.findIndex(bug => bug._id === bugToSave._id)
-    gBugs[idx] = bug
+    // gBugs[idx] = bug
+    gBugs.splice(idx, 1, bug)
   }
   else {
     gBugs.unshift(bug)
