@@ -11,8 +11,16 @@ app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
 
+app.post('/login', (req, res) => {
+  const { nickname } = req.body
+  res.cookie('nickname', nickname)
+  res.json({ nickname })
+})
+
 // Get Bugs list
 app.get('/api/bug', (req, res) => {
+  const { nickname } = req.cookies
+  if (!nickname) return res.status(401).send('Please login')
   bugService.query()
     .then(bugs => res.send(bugs))
 })
