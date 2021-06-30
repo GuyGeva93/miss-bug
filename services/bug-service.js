@@ -38,7 +38,6 @@ function save(bugToSave) {
   }
   if (bugToSave._id) {
     const idx = gBugs.findIndex(bug => bug._id === bugToSave._id)
-    // gBugs[idx] = bug
     gBugs.splice(idx, 1, bug)
   }
   else {

@@ -1,7 +1,10 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 const bugService = require('./services/bug-service.js')
+const userService = require('./services/user-service.js')
+// const userServiceCopy = require('./services/user-service-copy.js')
 const app = express()
 const port = 3000
 
@@ -11,16 +14,44 @@ app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
 
+app.use(session({
+  secret: 'some secret token',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+// Authentication
 app.post('/login', (req, res) => {
-  const { nickname } = req.body
-  res.cookie('nickname', nickname)
-  res.json({ nickname })
+  console.log('req.body', req.body)
+  const credentials = req.body
+  userService.checkLogin(credentials)
+    .then(user => {
+      if (user) {
+        req.session.loggedinAt = Date.now();
+        req.session.loggedinUser = user;
+        res.json(user);
+      } else {
+        res.status(401).send('Please login')
+      }
+    })
 })
 
 app.post('/logout', (req, res) => {
   res.clearCookie('nickname');
   res.send('Cookie is clear!');
 })
+
+app.post('/signup', (req, res) => {
+  const credentials = req.body
+  userServiceCopy.save(credentials)
+    .then(users => res.json(users))
+})
+
+// app.get('/api/user', (req, res) => {
+//   userServiceCopy.query()
+//     .then(users => res.send(users))
+// })
 
 // Get Bugs list
 app.get('/api/bug', (req, res) => {

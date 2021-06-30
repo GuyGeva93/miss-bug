@@ -1,7 +1,7 @@
 import { utilService } from "./util-service.js"
 
 
-var gLoggedInUser = utilService.loadFromStorage('USER')
+var gLoggedInUser = utilService.loadFromStorage()
 
 export const userService = {
   login,
@@ -9,8 +9,8 @@ export const userService = {
   getLoggedInUser
 }
 
-function login(nickname) {
-  return axios.post('/login', { nickname })
+function login(credentials) {
+  return axios.post('/login', { credentials })
     .then(res => res.data)
     .then(user => {
       gLoggedInUser = user

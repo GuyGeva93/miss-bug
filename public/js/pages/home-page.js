@@ -5,7 +5,7 @@ export default {
     <section class="home-page">
         <h1> miss-Bug </h1>
         <section v-if="loggedInUser">
-        <h2>Hello {{loggedInUser.nickname}} !</h2>
+        <h2>Hello {{loggedInUser.nickname}}</h2>
         <button @click="logout">Logout</button>
         </section>
         <form v-else @submit.prevent="login">
@@ -36,6 +36,7 @@ export default {
     }
   },
   created() {
-    userService.getLoggedInUser().then(user => this.loggedInUser = user)
+    userService.getLoggedInUser()
+      .then(user => this.loggedInUser = user)
   }
 }
