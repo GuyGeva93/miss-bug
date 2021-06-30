@@ -11,7 +11,7 @@ export default {
       </div>
       <div class="bug-app">
         <div v-for="bug in bugs">
-          <bug-preview :bug="bug" :user="user" @deletedBug="deleteBug" />
+          <bug-preview :bug="bug" :user="user" @deleteBug="deleteBug" />
         </div>
       </div>
    </section>

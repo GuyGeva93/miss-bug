@@ -1,17 +1,14 @@
 [
   {
-    "_id": "Wqkhw",
-    "username": "lala123",
-    "password": "lala123"
-  },
-  {
-    "_id": "U5ZDe",
+    "_id": "u101",
+    "fullname": "Lala",
     "username": "lala",
     "password": "lala1"
   },
   {
-    "_id": "u101",
-    "username": "babag",
-    "password": "123456"
+    "_id": "u102",
+    "fullname": "Popo",
+    "username": "popo",
+    "password": "popo1"
   }
 ]

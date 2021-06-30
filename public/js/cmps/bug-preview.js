@@ -6,7 +6,7 @@ export default {
       <p>Title: {{bug.title}}</p>
       <p>Description: {{bug.description}}</p>
       <p>Severity: {{bug.severity}}</p>
-      <p>Creator: {{bug.creator.nickname}}</p>
+      <p>Creator: {{bug.creator.fullname}}</p>
     </article>
     <aside v-if="isNicknameMatch">
       <button @click="deletedBug(bug._id)">✖</button>
@@ -16,7 +16,7 @@ export default {
   `,
   computed: {
     isNicknameMatch() {
-      return (this.bug.creator.nickname === this.user.nickname)
+      return (this.bug.creator.username === this.user.username)
     }
   },
   methods: {
@@ -25,9 +25,6 @@ export default {
     },
   },
 
-  created() {
-    console.log('this.user', this.user)
-    console.log('this.bug', this.bug)
-  }
 
 }
+

@@ -2,8 +2,8 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
-const bugService = require('./services/bug-service.js')
-const userService = require('./services/user-service.js')
+const bugService = require('./services/bug-service')
+const userService = require('./services/user-service')
 // const userServiceCopy = require('./services/user-service-copy.js')
 const app = express()
 const port = 3000
@@ -22,13 +22,13 @@ app.use(session({
 }))
 
 // Authentication
-app.post('/login', (req, res) => {
-  console.log('req.body', req.body)
-  const credentials = req.body
+app.post('/api/user/login', (req, res) => {
+  const { credentials } = req.body
   userService.checkLogin(credentials)
     .then(user => {
       if (user) {
-        req.session.loggedinAt = Date.now();
+        console.log(user);
+        // req.session.loggedinAt = Date.now();
         req.session.loggedinUser = user;
         res.json(user);
       } else {
@@ -37,26 +37,22 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/logout', (req, res) => {
-  res.clearCookie('nickname');
-  res.send('Cookie is clear!');
+app.post('/api/user/logout', (req, res) => {
+  req.session.destroy()
+  res.end('Cleared from session');
 })
 
-app.post('/signup', (req, res) => {
+app.post('/api/user/signup', (req, res) => {
   const credentials = req.body
   userServiceCopy.save(credentials)
     .then(users => res.json(users))
 })
 
-// app.get('/api/user', (req, res) => {
-//   userServiceCopy.query()
-//     .then(users => res.send(users))
-// })
 
 // Get Bugs list
 app.get('/api/bug', (req, res) => {
-  const { nickname } = req.cookies
-  if (!nickname) return res.status(401).send('Please login')
+  // const { nickname } = req.cookies
+  // if (!nickname) return res.status(401).send('Please login')
   bugService.query()
     .then(bugs => res.send(bugs))
 })
@@ -70,13 +66,15 @@ app.get('/api/bug/:bugId', (req, res) => {
 
 // Create bug
 app.post('/api/bug', (req, res) => {
-  const { title, description, severity, createdAt, creator } = req.body
+  const { loggedinUser } = req.session
+  if (!loggedinUser) res.status(401).send('Please login')
+  const { title, description, severity, createdAt } = req.body
   const bug = {
     title,
     description,
     severity,
     createdAt,
-    creator
+    creator: loggedinUser
   }
   bugService.save(bug)
     .then(savedBug => {

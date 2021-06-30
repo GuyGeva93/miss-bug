@@ -11,6 +11,7 @@ module.exports = {
 }
 
 function checkLogin(credentials) {
+
   var user = gUsers.find(user => user.username === credentials.username && user.password === credentials.password)
   if (user) {
     user = { ...user }
