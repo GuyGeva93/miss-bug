@@ -17,6 +17,11 @@ app.post('/login', (req, res) => {
   res.json({ nickname })
 })
 
+app.post('/logout', (req, res) => {
+  res.clearCookie('nickname');
+  res.send('Cookie is clear!');
+})
+
 // Get Bugs list
 app.get('/api/bug', (req, res) => {
   const { nickname } = req.cookies

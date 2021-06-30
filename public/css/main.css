@@ -1,4 +1,9 @@
-@import './pages/bug-app.css';
+@import './new-css/app-header.css';
+@import './new-css/about-page.css';
+@import './new-css/home-page.css';
+@import './new-css/app-footer.css';
+@import './new-css/bug-app.css';
+@import './new-css/bug-edit.css';
 * {
   box-sizing: border-box
 }
@@ -15,4 +20,8 @@ button {
 h2 {
   margin: 0;
   padding: 0
+}
+
+a {
+  text-decoration: none;
 }

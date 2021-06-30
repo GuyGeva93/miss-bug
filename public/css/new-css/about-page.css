@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.about-page{
+    background-color: lightgray;
+    height: 90vh;
+}
+
+.about-page h1{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-page p{
+    text-align: center;
+}

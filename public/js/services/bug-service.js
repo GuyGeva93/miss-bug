@@ -13,11 +13,16 @@ function query() {
 }
 
 function getById(bugId) {
-
+  return axios.get(`/api/bug/${bugId}`)
+    .then(res => res.data)
 }
 
-function save() {
-
+function save(bug) {
+  if (bug._id) {
+    return axios.put(`/api/bug`, bug).then(res => res.data)
+  } else {
+    return axios.post(`/api/bug`, bug).then(res => res.data)
+  }
 }
 
 function remove(bugId) {
@@ -26,5 +31,13 @@ function remove(bugId) {
 }
 
 function getEmptyBug() {
-  const bug = {}
+  const bug = {
+    _id: '',
+    title: '',
+    description: '',
+    severity: '',
+    createdAt: '',
+    creator: { nickname: '' }
+  }
+  return bug
 }

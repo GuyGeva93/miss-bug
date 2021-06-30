@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+footer {
+    height: 5vh;
+    background-color: rgb(234, 238, 8);
+}
+
+footer p {
+    margin: 0 auto;
+    text-align: center;
+    font-family: cursive;
+    font-size: large;
+}
